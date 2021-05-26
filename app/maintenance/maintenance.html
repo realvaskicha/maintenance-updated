@@ -1,284 +1,325 @@
+<head>
+    <!-- <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/datepicker.css">
+
+    <script src="lib/angular/angular.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/bootstrap/bootstrap-datepicker.js"></script>
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-ui-date/dist/date.js"></script> -->
+</head>
 <body ng-cloak>
-    <div ng-controller="formControl">
-<!-- Maintenance Title -->
-<div class="text-left">
+    <div class="bg">
+            <div ng-controller="formControl">
+                <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" dismiss-on-timeout="5000" close="closeAlert($index)">{{alert.msg}}</div>
+                <!-- Maintenance Title -->
+                <br>
+                <br>
+                <div class="text-left">
+                    <h6>Maintenance</h6>
+                </div>
+                <!-- Buttons & Dropdowns -->
+                <div class="nav">
+                    <div class="upper-bar">
+                        <!-- Asset Filter -->
+                        <md-input-container style="width:12%; margin-right:25px;" flex-gt-sm>
+                            <label>Asset Type</label>
+                          <md-select ng-model="typeFilter">
+                              <md-option value="{{undefined}}">All</md-option>
+                              <md-option value="Computer">Computer</md-option>
+                              <md-option value="Laptop">Laptop</md-option>
+                              <md-option value="iMac">iMac</md-option>
+                              <md-option value="Monitor">Monitor</md-option>
+                              <md-option value="Printer">Printer</md-option>
+                              <md-option value="Peripheral device">Peripheral device</md-option>
+                              <md-option value="Other">Other</md-option>
+                          </md-select>
+                        </md-input-container>
+                        <!-- Team/Department Filter -->
+                        <md-input-container style="width:12%; margin-right:25px;" flex-gt-sm>
+                        <label>Team</label>
+                          <md-select ng-model="teamFilter">
+                              <md-option value="{{undefined}}">All</md-option>
+                              <md-option value="Service Plan">Service Plan</md-option>
+                              <md-option value="Menu Pricing">Menu Pricing</md-option>
+                              <md-option value="iVHC Web">iVHC Web</md-option>
+                              <md-option value="iVHC Database">iVHC Database</md-option>
+                              <md-option value="CRM">CRM</md-option>
+                              <md-option value="Stock Master">Stock Master</md-option>
+                              <md-option value="Cloud & Infrastructure">Cloud & Infrastructure</md-option>
+                              <md-option value="In House Systems">In House Systems</md-option>
+                              <md-option value="Mobile">Other</md-option>
+                              <md-option value="API">API</md-option>
+                              <md-option value="Service Plan Support">Service Plan Support</md-option>
+                              <md-option value="iVHC Support">iVHC Support</md-option>
+                              <md-option value="Customer Portal">Customer Portal</md-option>
+                          </md-select>
+                        </md-input-container>
+                        <!-- Adjust Manually Button -->
+                        <button id="adjustButton" data-toggle="collapse" href="#menu" aria-expanded="true" aria-controls="menu">Adjust Manually</button>
+                    </div>
+                    <!-- Inputs -->
+                    <div id="menu" class="container collapse">
+                        <h5>Asset Management</h5>
+                        <ng-form name="AssetForm">
+                            <div class="row">
+                                        <div class="col-sm">
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>ESET Number</label>
+                                                <input class="form-control" ng-model="model.eset" required>
+                                            </md-input-container>
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Brand</label>
+                                                <input ng-model="model.brand">
+                                            </md-input-container>
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>Asset Type</label>
+                                                  <md-select ng-model="model.type" required>
+                                                      <md-option value="Computer">Computer</md-option>
+                                                      <md-option value="Laptop">Laptop</md-option>
+                                                      <md-option value="iMac">iMac</md-option>
+                                                      <md-option value="Monitor">Monitor</md-option>
+                                                      <md-option value="Printer">Printer</md-option>
+                                                      <md-option value="Peripheral device">Peripheral device</md-option>
+                                                      <md-option value="Other">Other</md-option>
+                                                  </md-select>
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-sm">
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>Serial</label>
+                                                    <input ng-model="model.serial">
+                                            </md-input-container>
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>SSD</label>
+                                                    <input ng-model="model.ssd">
+                                            </md-input-container>
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>CPU</label>
+                                                    <input ng-model="model.cpu">
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-sm">
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>HDD</label>
+                                                <input ng-model="model.hdd">
+                                            </md-input-container>
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>RAM</label>
+                                                <input ng-model="model.ram">
+                                            </md-input-container>
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Operation system</label>
+                                                <input ng-model="model.os">
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-sm">
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>GPU</label>
+                                                    <input ng-model="model.gpu">
+                                            </md-input-container>
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>User</label>
+                                                    <input class="form-control" ng-model="model.user" required>
+                                            </md-input-container>
+                                            </div>
+                                        </ng-form>
+                                            <div class="col-sm">
+                                                    <label for="date-input">Warranty:</label>
+                                                <p><md-datepicker ng-model="model.warranty" md-placeholder="Enter date" md-open-on-focus></md-datepicker></p>
+                                                    <label for="date-input">Last Maintenance:</label>
+                                                <p><md-datepick ng-model="model.lastmaint" md-placeholder="Enter date" md-open-on-focus></md-datepicker></p>
+                                            </div>
+                                    
+                            </div>
+                            <!-- Form Buttons -->
+                            <div class="man-but">
+                                <button type="submit" class="man-but-insert" ng-disabled="AssetForm.$invalid" ng-click="addAsset(); successA()">Insert</button>
+                                <button class="man-but-remove" ng-click="removeAsset(); removeA()">Remove</button>
+                                <button class="man-but-clear" ng-click="reset()" >Clear</button>
+                            </div>
+                       
+                    </div>
+                    <!-- Table 1 - Maintenance -->
+                    <div class="table1" >
+                    <table style="width:100%">
+                        <!-- Table Headers -->
+                        <thead>
+                            <tr id="tr1">
+                                <th></th>
+                                <th>ID</th>
+                                <th>ESET Number</th>
+                                <th>Type</th>
+                                <th>Brand</th>
+                                <th>Serial/Service Tag</th>
+                                <th>Description</th>
+                                <th>User</th>
+                                <th>Date Added</th>
+                                <th>Warranty</th>
+                                <th>Last Maintenance</th>
+                            </tr>
+                        </thead>
+                        <!-- Data -->
+                        <tbody>
+                            <!-- ngRepeat: asset in assetArray -->
+                            <tr ng-repeat="asset in assetArray | filter:predicate(typeFilter)">
+                                <td class="ng-binding">
+                                    <input id="newbox" type="checkbox" ng-model="asset.Remove"/>
+                                </td>
+                                <td class="ng-binding">{{ $index + 1 }}</td>
+                                <td class="ng-binding">{{ asset.eset }}</td>
+                                <td class="ng-binding">{{ asset.type }}</td>
+                                <td class="ng-binding">{{ asset.brand }}</td>
+                                <td class="ng-binding">{{ asset.serial }}</td>
+                                <td class="ng-binding">{{ asset.description }}</td>
+                                <td class="ng-binding">{{ asset.user }}</td>
+                                <td class="ng-binding">{{ asset.dateAdded | date:'dd.MM.yyyy'}}</td>
+                                <td class="ng-binding">{{ asset.warranty | date:'dd.MM.yyyy'}}</td>
+                                <td class="ng-binding">{{ asset.lastmaint | date:'dd.MM.yyyy'}}</td>
+                            </tr> 
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                    <!-- Specifications & Costs Title -->
+                    <div class="text-left">
+                    <h6>Specifications</h6>
+                    </div>
+                <div class="nav">
+                        <!-- Buttons/Dropdowns -->
+                        <div class="upper-bar">
+                            <label style="margin-right:8px;" for="s.type">Part Type:</label>
+                            <select class="custom-select filter" style="margin-right:25px;" id="s.type" name="s.type">
+                                <option value="All">All</option>
+                                <option value="CPU">CPU</option>
+                                <option value="RAM">RAM</option>
+                                <option value="HDD">HDD</option>
+                                <option value="SSD">SSD</option>
+                                <option value="GPU">GPU</option>
+                                <option value="Software">Software</option>
+                                <option value="Peripheral device">Peripheral device</option>
+                            </select>
+                            <label style="margin-right:8px;" for="m.manu">Manufacturer:</label>
+                            <select class="custom-select filter" style="margin-right:25px;" id="s.manu" name="s.manu">
+                                <option value="All">All</option>
+                                <option value="Intel">Intel</option>
+                                <option value="AMD">AMD</option>
+                                <option value="Apple">Apple</option>
+                                <option value="LG">LG</option>
+                            </select>
+                        </div>
+                    <!-- Table 2 - Specifications -->
+                    <div class="table2">
+                        <table style="width:100%">
 
-    <h6>Maintenance</h6>
-
-</div>
-<!-- Buttons & Dropdowns -->
-<div class="nav">
-    <!-- Asset Filter -->
-    <label style="margin-right:8px;" for="assets">Asset Type:</label>
-    <select style="margin-right:25px;" id="assets" name="assets">
-        <option value="All">All</option>
-        <option value="Computer">Computer</option>
-        <option value="Laptop">Laptop</option>
-        <option value="iMac">iMac</option>
-        <option value="Monitor">Monitor</option>
-        <option value="Printer">Printer</option>
-        <option value="Peripheral device">Peripheral device</option>
-    </select>
-
-    <!-- Team/Department Filter -->
-    <label style="margin-right:8px;" for="Team">Team:</label>
-    <select style="margin-right:10px;" id="Team" name="Team">
-        <option value="All Teams">All</option> 
-        <option value="Service Plan">Service Plan</option>
-        <option value="Menu Pricing">Menu Pricing</option>
-        <option value="iVHC Web">iVHC Web</option>
-        <option value="iVHC Database">iVHC Database</option>
-        <option value="CRM">CRM</option>
-        <option value="Stock Master">Stock Master</option>
-        <option value="Cloud & Infrastructure">Cloud & Infrastructure</option>
-        <option value="In House Systems">In House Systems</option>
-        <option value="Mobile">Mobile</option>
-        <option value="API">API</option>
-        <option value="Service Plan Support">Service Plan Support</option>
-        <option value="iVHC Support">iVHC Support</option>
-        <option value="Customer Portal">Customer Portal</option>
-    </select>
-
-    <!-- Buttons -->
-    <button ng-click="hideInput()" >Adjust Manually</button>
-
-    <!-- Inputs -->
-    <div class="container" ng-hide="hidden">
-        <h5>Asset Management</h5>
-        <div class="row">
-            <div class="col-sm">
-                <form name="AssetManagementForm">
-                    <p><input required ng-model="model.eset" class="form-control-mx-sm" name="ESET" placeholder="Eset Number" type="text"></p>
-                        <p><select class="custom-select" required ng-model="model.type" name="Type">
-                            <option value="1">Computer</option>
-                            <option value="2">Laptop</option>
-                            <option value="3">iMac</option>
-                            <option value="4">Monitor</option>
-                            <option value="5">Printer</option>
-                            <option value="6">Peripheral device</option>
-                        </select></p>
-                    <p><input ng-model="model.brand" name="Brand" placeholder="Brand" type="text"></p>
-                    <p><input ng-model="model.serial" name="Serial" placeholder="Serial/Service Tag" type="number"></p>
+                            <!-- Table Headers -->
+                            <thead>
+                                <tr id="tr1">
+                                    <th></th>
+                                    <th>Code</th>
+                                    <th>Type</th>
+                                    <th>Model</th>
+                                    <th>Manufacturer</th>
+                                    <th>Description</th>
+                                    <th>Warranty</th>
+                                    <th>Maintenance Hours</th>
+                                    <th>?Price?</th>
+                                </tr>
+                            </thead>
+                            <!-- Data -->
+                            <tbody>
+                                <tr class="active">
+                                    <td>
+                                            <input id="newbox" type="checkbox" />
+                                            <span class="custom-checkbox"></span>
+                                    </td>
+                                    <td>0001</td>
+                                    <td>CPU</td>
+                                    <td>I5-4570</td>
+                                    <td>Intel</td>
+                                    <td>Discontinued - 4th Generation Intel Core I5 Processors</td>
+                                    <td>Expired</td>
+                                    <td>1</td>
+                                    <td>$192</td>
+                                </tr>
+                            </tbody>
+                            <!-- Total -->
+                            <tfoot>
+                                <tr>
+                                    <th id="total" colspan="7">Total:&nbsp;</th>
+                                    <td>1</td>
+                                    <td>$192</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm">
-                    <p><input ng-model="model.ssd" name="SSD" placeholder="SSD" type="text"></p>
-                    <p><input ng-model="model.cpu" name="CPU" placeholder="CPU" type="text"></p>
-                    <p><input ng-model="model.hdd" name="HDD" placeholder="HDD" type="text"></p>
-                    <p><input ng-model="model.ram" name="RAM" placeholder="RAM" type="text"> </p>
-            </div>
-            <div class="col-sm">
-                <p><input ng-model="model.os" name="OS" placeholder="Operation System" type="text"></p>
-                    <p><input ng-model="model.gpu" name="GPU" placeholder="GPU" type="text"></p>
-                    <p><input ng-model="model.user" name="User" placeholder="User"type="text"></p>
-            </div>
-            <div class="col-sm">
-                    <label for="date-input">Warranty:</label>
-                    <input ng-model="model.warranty" class="form-control form-control-sm" name="Warranty" type="date">
-                    <label for="date-input">Last Maintenance:</label>
-                    <input ng-model="model.lastmaint" class="form-control form-control-sm" name="LastMaint" type="date">
-            </div>
-                 </form>
-        </div>
-        <div class="man-but">
-            <button ng-disabled="AssetManagementForm.$invalid" ng-click="addAsset()">Insert</button>
-            <button ng-click="removeAsset()">Remove</button>
-            <button ng-click="reset()">Clear</button>
-        </div>
+            <div>&nbsp;</div>
     </div>
-</div>
-
-<!-- Table 1 - Maintenance -->
-<div>
-    <table class="table1">
-        
-        <!-- Table Headers -->
-        <thead>
-            <tr id="tr1">
-                <th></th>
-                <th>ID</th>
-                <th>ESET Number</th>
-                <th>Type</th>
-                <th>Brand</th>
-                <th>Serial/Service Tag</th>
-                <th id="thdesc" colspan="6">Description</th>
-                <th>User</th>
-                <th>Date Added</th>
-                <th>Warranty</th>
-                <th>Last Maintenance</th>
-            </tr>
-
-            <!-- Table Sub-Headers -->
-            <tr id="tr2">
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th id="thdesc">CPU</th>
-                <th id="thdesc">RAM</th>
-                <th id="thdesc">HDD</th>
-                <th id="thdesc">SSD</th>
-                <th id="thdesc">OS</th>
-                <th id="thdesc">GPU</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-
-        <!-- Data -->
-        <tbody>
-            <tr ng-repeat="asset in assetArray">
-                <td>
-                    <input id="newbox" type="checkbox" ng-model="asset.Remove"/>
-                    <span class="custom-checkbox"></span>
-                </td>
-                <td>{{ $index + 1 }}</td>
-                <td>{{ asset.eset }}</td>
-                <td>{{ asset.type }}</td>
-                <td>{{ asset.brand }}</td>
-                <td>{{ asset.serial }}</td>
-                <td>{{ asset.cpu }}</td>
-                <td>{{ asset.ram }}</td>
-                <td>{{ asset.hdd }}</td>
-                <td>{{ asset.ssd }}</td>
-                <td>{{ asset.os }}</td>
-                <td>{{ asset.gpu }}</td>
-                <td>{{ asset.user }}</td>
-                <td>{{ asset.dateAdded | date:'dd-MM-yyyy'}}</td>
-                <td>{{ asset.warranty }}</td>
-                <td>{{ asset.lastmaint }}</td>
-            </tr> 
-        </tbody>
-    </table>
-</div>
-
-<!-- Specifications & Costs Title -->
-<div class="text-left">
-    <h6>Specifications</h6>
-</div>
-
-<!-- Buttons/Dropdowns -->
-<div class="nav">
-    <label style="margin-right:8px;" for="s.type">Part Type:</label>
-    <select style="margin-right:25px;" id="s.type" name="s.type">
-        <option value="All">All</option>
-        <option value="CPU">CPU</option>
-        <option value="RAM">RAM</option>
-        <option value="HDD">HDD</option>
-        <option value="SSD">SSD</option>
-        <option value="GPU">GPU</option>
-        <option value="Software">Software</option>
-        <option value="Peripheral device">Peripheral device</option>
-    </select>
-    <label style="margin-right:8px;" for="m.manu">Manufacturer:</label>
-    <select style="margin-right:25px;" id="s.manu" name="s.manu">
-        <option value="All">All</option>
-        <option value="Intel">Intel</option>
-        <option value="AMD">AMD</option>
-        <option value="Apple">Apple</option>
-        <option value="LG">LG</option>
-    </select>
-</div>
-
-<!-- Table 2 - Specifications -->
-<div class="table2">
-    <table style="width:100%">
-
-        <!-- Table Headers -->
-        <thead>
-            <tr id="tr1">
-                <th></th>
-                <th>Code</th>
-                <th>Type</th>
-                <th>Model</th>
-                <th>Manufacturer</th>
-                <th>Description</th>
-                <th>Warranty</th>
-                <th>Maintenance Hours</th>
-                <th>?Price?</th>
-            </tr>
-        </thead>
-
-        <!-- Data -->
-        <tbody>
-            <tr class="active">
-                <td>
-                        <input id="newbox" type="checkbox" />
-                        <span class="custom-checkbox"></span>
-                </td>
-                <td>0001</td>
-                <td>CPU</td>
-                <td>I5-4570</td>
-                <td>Intel</td>
-                <td>Discontinued - 4th Generation Intel Core I5 Processors</td>
-                <td>Expired</td>
-                <td>1</td>
-                <td>$192</td>
-            </tr>
-        </tbody>
-
-        <!-- Total -->
-        <tfoot>
-            <tr>
-                <th id="total" colspan="7">Total:&nbsp;</th>
-                <td>1</td>
-                <td>$192</td>
-            </tr>
-        </tfoot>
-    </table>
-</div>
-</div>
 </body>
+
 
 <!-- Style -->
 <style>
+    .bg{
+        background-color: #EEEEEE;
+    }
     /*Titles & Headings*/
     h6 {
         font-size: 36px;
         margin:20px;
+        color:#2C2F3E;
     }
 
     h5{
         font-size: 24px;
         margin:15px;
+        color:#2C2F3E;
     }
 
     /*Tables*/
     .table1 {
-        width:90%;
+        width:100%;
         margin-left:80px;
         margin-right:80px;
+        margin-bottom:12px;
         font-size: 14px;
-        border: 1px solid lightblue;
+        border: 1px solid #F5F8FD;
         text-align: center;
-        margin-bottom:5px;
+        background-color: white;
     }
     .table2 {
-        width: 90%;
+        width: 100%;
         margin-left:80px;
         margin-right:80px;
+        margin-bottom: 12px;
         font-size: 14px;
-        border: 1px solid lightblue;
-        text-align: center
+        border: 1px solid #F5F8FD;
+        text-align: center;
+        background-color:white;
     }
-    #thdesc {
-        border: 1px solid lightblue !important;
+     #thdesc {
+        border-inline-start: 1px solid #F5F8FD;
+        border-inline-end: 1px solid #F5F8FD;
+        color: #2C2F3E;
+    } 
 
-    }
     td {
-        border: 1px solid lightblue;
+        border: 1px solid #F5F8FD;
         font-size: 12px;
         text-align: left;
         padding: 5px;
     }
     th {
-        background-color: aliceblue;
+        background-color: #88C7EB;
     }
     tr:hover {
-        background-color: azure;
+        background-color: #F5F8FD;
     }
     #total {
         text-align:right;
@@ -288,25 +329,85 @@
     }    
 
     /* Navigation */
+    @media (prefers-reduced-motion: reduce) {
+    .collapsing {
+        transition-property: height, visibility;
+        transition-duration: .35s;
+    }
     .nav{
         margin-bottom:10px;
         margin-left:80px;
         margin-right:80px;
+        background-color: white;
+        border-radius: 7px;
     }
 
+    .row{
+        border-radius: 12px;
+        background-color:#F5F8FD;
+        border:1px solid #C5DDF0;
+    }
+
+    .col-sm{
+        margin-top:20px;
+    }
+    .custom-select {
+        width:72%;
+    }
+    .custom-select.filter{
+        width:12%;
+    }
+
+    .upper-bar{
+        border-radius: 15px;
+        padding: 10px;
+        background-color: white;
+        width:100%;
+        margin-left:60px;
+    }
     /* Buttons */
+    #adjustButton{
+        background-color:#88C7EB;
+        border-radius: 5px;
+        color:white;
+        border-color:unset;
+        border-width: 1px;
+    }
     .man-but{
         text-align:center;
         margin-top:10px;
         margin-bottom: 20px;
     }
+    .man-but-clear {
+        background-color:#B4B7BA; 
+        border-radius: 5px;
+        color:white; 
+        border-color: unset;
+        border-width: 1px;
+    }
 
+    .man-but-remove{
+        background-color:#F5A061;
+        border-radius: 5px;
+        color:white;
+        border-color:unset;
+        border-width: 1px;
+    }
+    .man-but-insert{
+        background-color:#7BC96C;
+        border-radius: 5px;
+        color:white;
+        border-color:unset;
+        border-width: 1px;
+    }
+    /* Alerts */
     .alert{
-        text-align:center;
-        
+        position: fixed;
+        text-align: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px;    
     }
-    /* Input */
-    input.ng-invalid.ng-dirty{
-        background-color:mistyrose;
-    }
+}
 </style>
