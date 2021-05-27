@@ -65,7 +65,7 @@
                     <!-- Inputs -->
                     <div id="menu" class="container collapse">
                         <h5>Asset Management</h5>
-                        <ng-form name="AssetForm">
+                        <form name="AssetForm">
                             <div class="row">
                                         <div class="col-sm">
                                             <md-input-container class="md-block" flex-gt-sm>
@@ -127,13 +127,14 @@
                                                     <input class="form-control" ng-model="model.user" required>
                                             </md-input-container>
                                             </div>
-                                        </ng-form>
+                                       
                                             <div class="col-sm">
                                                     <label for="date-input">Warranty:</label>
                                                 <p><md-datepicker ng-model="model.warranty" md-placeholder="Enter date" md-open-on-focus></md-datepicker></p>
                                                     <label for="date-input">Last Maintenance:</label>
-                                                <p><md-datepick ng-model="model.lastmaint" md-placeholder="Enter date" md-open-on-focus></md-datepicker></p>
+                                                <p><md-datepicker ng-model="model.lastmaint" md-placeholder="Enter date" md-open-on-focus></md-datepicker></p>
                                             </div>
+                        </form>
                                     
                             </div>
                             <!-- Form Buttons -->
@@ -188,6 +189,7 @@
                     <!-- Specifications & Costs Title -->
                     <div class="text-left">
                     <h6>Specifications</h6>
+                    <p style="margin-left: 50px; color: grey;">(if time allows)</p>
                     </div>
                 <div class="nav">
                         <!-- Buttons/Dropdowns -->
@@ -316,7 +318,7 @@
         padding: 5px;
     }
     th {
-        background-color: #88C7EB;
+        background-color: #C5DDF0;
     }
     tr:hover {
         background-color: #F5F8FD;
@@ -367,7 +369,7 @@
     }
     /* Buttons */
     #adjustButton{
-        background-color:#88C7EB;
+        background-color:#B4B7BA;
         border-radius: 5px;
         color:white;
         border-color:unset;

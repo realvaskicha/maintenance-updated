@@ -15,8 +15,8 @@ angular.module('myApp.maintenance', [
   }])
 
 .controller ('formControl', function($scope) {
-  //data model
-    const model = { eset: "", type: "", brand: "", serial: "", description: "", user: "", warranty: "", lastmaint: "" }
+  //data model input fields
+    const model = { eset: "", type: "", brand: "", serial: "", description: "", user: "", warranty: "null", lastmaint: "null" }
     $scope.model = angular.copy(model)
     console.log(model)
     console.log($scope.model)
@@ -30,7 +30,7 @@ angular.module('myApp.maintenance', [
       $scope.model = angular.copy(model);
     };
 
-    //add asset
+    //insert asset
     $scope.addAsset = function() {
       $scope.model.dateAdded = new Date()
       $scope.model.description = "SSD: " + $scope.model.ssd + ", " + "CPU: " + $scope.model.cpu + ", " + "HDD: " + $scope.model.hdd + ", " + "RAM: " + $scope.model.ram + ", " + "OS: " + $scope.model.os + ", " + "GPU: " + $scope.model.gpu
