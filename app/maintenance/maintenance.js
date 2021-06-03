@@ -14,12 +14,42 @@ angular.module('myApp.maintenance', [
     });
   }])
 
+//   .filter("undeFilter",function(){
+//   return function(input){
+//          switch(input){
+//          case undefined:
+//          return "";
+//   }
+// }})
+
 .controller ('formControl', function($scope) {
   //data model input fields
-    const model = { eset: "", type: "", brand: "", serial: "", description: "", user: "", warranty: "null", lastmaint: "null" }
+    const model = { selected: false,  eset: null, type: null, brand: "", serial: "", description: "", user: null, warranty: null, lastmaint: null }
     $scope.model = angular.copy(model)
     console.log(model)
     console.log($scope.model)
+    
+  //read data csv
+    // const parseOptions = {
+    //   header: true,
+    //   quoteChar: '"', // quoting character
+    //   delimiter: ';',
+    //   skipEmptyLines: true, // ignore empty lines
+    //   dynamicTyping: true,  // parse numbers automatically
+    // };
+
+    Papa.parse("/maintenance/edyn-pc.csv", {
+      download: true,
+      header:true,
+      dynamicTyping:true,
+      complete: function(results) {
+        $scope.results = results.data;
+        $scope.fields = results.meta.fields;
+        console.log("delimiter:", results.meta.delimiter);
+        console.log(results);
+      }
+      
+    });
 
     //mock data asset array
     $scope.assetArray = [{ eset: "EDYN-00315", type: "Laptop", brand: "HP", serial: "S/N: 2CE3341P2D",
@@ -43,7 +73,7 @@ angular.module('myApp.maintenance', [
     $scope.removeAsset = function(){
       var arrayAsset = [];
       angular.forEach($scope.assetArray, function(value) {
-        if (!value.Remove) {
+        if (!value.selected) {
           arrayAsset.push(value);
         }
       });
@@ -53,11 +83,11 @@ angular.module('myApp.maintenance', [
     //alerts
     $scope.alerts = []; 
 
-    $scope.successA = function() {
+    $scope.successAlert = function() {
       $scope.alerts.push({type: 'success', msg: 'Successfully inserted new asset(s).'});
     };
 
-    $scope.removeA = function() {
+    $scope.removeAlert = function() {
       $scope.alerts.push({type: 'danger', msg: 'Successfully removed asset(s).'});
     };
 
@@ -69,13 +99,23 @@ angular.module('myApp.maintenance', [
     // alert(JSON.stringify(asset));
     //}
 
-    //highlight row
-    
+    //highlight table row onclick
+
     //type filter
     $scope.predicate = function (typeFilter) {
       return function (asset) {
         return !typeFilter || asset.type === typeFilter;
       };
     };
+
+    //remove button validation
+    
+    //pagination
+    $(document).ready(function () {
+      //Pagination full
+      $('#paginationFull').DataTable({
+        "pagingType": "full"
+      });
+    });
   }
 )
