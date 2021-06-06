@@ -12,184 +12,205 @@
     <script src="lib/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-ui-date/dist/date.js"></script> -->
 </head>
+
 <body ng-cloak>
     <div>
-            <div ng-controller="formControl">
-                <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" dismiss-on-timeout="5000" close="closeAlert($index)">{{alert.msg}}</div>
-                <!-- Maintenance Title -->
-                <br>
-                <br>
-                <div class="text-left">
-                    <h6>Maintenance</h6>
-                </div>
-                <!-- Buttons & Dropdowns -->
-                <div class="nav">
-                    <div class="upper-bar">
-                        <!-- Asset Filter -->
-                        <md-input-container style="width:12%; margin-right:25px;" flex-gt-sm>
-                            <label>Asset Type</label>
-                          <md-select ng-model="typeFilter">
-                              <md-option value="{{undefined}}">All</md-option>
-                              <md-option value="Computer">Computer</md-option>
-                              <md-option value="Laptop">Laptop</md-option>
-                              <md-option value="iMac">iMac</md-option>
-                              <md-option value="Monitor">Monitor</md-option>
-                              <md-option value="Printer">Printer</md-option>
-                              <md-option value="Peripheral device">Peripheral device</md-option>
-                              <md-option value="Other">Other</md-option>
-                          </md-select>
-                        </md-input-container>
-                        <!-- Team/Department Filter -->
-                        <md-input-container style="width:12%; margin-right:25px;" flex-gt-sm>
+        <div ng-controller="formControl">
+            <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')"
+                dismiss-on-timeout="5000" close="closeAlert($index)">{{alert.msg}}</div>
+            <!-- Maintenance Title -->
+            <br>
+            <br>
+            <div class="text-left">
+                <h6>Maintenance</h6>
+            </div>
+            <!-- Buttons & Dropdowns -->
+            <div class="nav">
+                <div class="upper-bar">
+                    <!-- Asset Filter -->
+                    <md-input-container style="width:12%; margin-right:25px;" flex-gt-sm>
+                        <label>Asset Type</label>
+                        <md-select ng-model="typeFilter">
+                            <md-option value="{{undefined}}">All</md-option>
+                            <md-option value="Computer">Computer</md-option>
+                            <md-option value="Laptop">Laptop</md-option>
+                            <md-option value="iMac">iMac</md-option>
+                            <md-option value="Monitor">Monitor</md-option>
+                            <md-option value="Printer">Printer</md-option>
+                            <md-option value="Peripheral device">Peripheral device</md-option>
+                            <md-option value="Other">Other</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <!-- Team/Department Filter -->
+                    <md-input-container style="width:12%; margin-right:25px;" flex-gt-sm>
                         <label>Team</label>
-                          <md-select ng-model="teamFilter">
-                              <md-option value="{{undefined}}">All</md-option>
-                              <md-option value="Service Plan">Service Plan</md-option>
-                              <md-option value="Menu Pricing">Menu Pricing</md-option>
-                              <md-option value="iVHC Web">iVHC Web</md-option>
-                              <md-option value="iVHC Database">iVHC Database</md-option>
-                              <md-option value="CRM">CRM</md-option>
-                              <md-option value="Stock Master">Stock Master</md-option>
-                              <md-option value="Cloud & Infrastructure">Cloud & Infrastructure</md-option>
-                              <md-option value="In House Systems">In House Systems</md-option>
-                              <md-option value="Mobile">Other</md-option>
-                              <md-option value="API">API</md-option>
-                              <md-option value="Service Plan Support">Service Plan Support</md-option>
-                              <md-option value="iVHC Support">iVHC Support</md-option>
-                              <md-option value="Customer Portal">Customer Portal</md-option>
-                          </md-select>
-                        </md-input-container>
-                        <!-- Adjust Manually Button -->
-                        <button id="adjustButton" data-toggle="collapse" href="#menu" aria-expanded="true" aria-controls="menu">Adjust Manually</button>
-                    </div>
-                    <!-- Inputs -->
-                    <div id="menu" class="container collapse">
-                        <h5>Asset Management</h5>
-                        <form name="AssetForm">
-                            <div class="row">
-                                        <div class="col-sm">
-                                            <md-input-container class="md-block" flex-gt-sm>
-                                                <label>ESET Number</label>
-                                                <input class="form-control" ng-model="model.eset" required>
-                                            </md-input-container>
-                                            <md-input-container class="md-block" flex-gt-sm>
-                                                <label>Brand</label>
-                                                <input ng-model="model.brand">
-                                            </md-input-container>
-                                            <md-input-container class="md-block" flex-gt-sm>
-                                                    <label>Asset Type</label>
-                                                  <md-select ng-model="model.type" required>
-                                                      <md-option value="Computer">Computer</md-option>
-                                                      <md-option value="Laptop">Laptop</md-option>
-                                                      <md-option value="iMac">iMac</md-option>
-                                                      <md-option value="Monitor">Monitor</md-option>
-                                                      <md-option value="Printer">Printer</md-option>
-                                                      <md-option value="Peripheral device">Peripheral device</md-option>
-                                                      <md-option value="Other">Other</md-option>
-                                                  </md-select>
-                                            </md-input-container>
-                                        </div>
-                                        <div class="col-sm">
-                                            <md-input-container class="md-block" flex-gt-sm>
-                                                    <label>Serial</label>
-                                                    <input ng-model="model.serial">
-                                            </md-input-container>
-                                            <md-input-container class="md-block" flex-gt-sm>
-                                                    <label>SSD</label>
-                                                    <input ng-model="model.ssd">
-                                            </md-input-container>
-                                            <md-input-container class="md-block" flex-gt-sm>
-                                                    <label>CPU</label>
-                                                    <input ng-model="model.cpu">
-                                            </md-input-container>
-                                        </div>
-                                        <div class="col-sm">
-                                            <md-input-container class="md-block" flex-gt-sm>
-                                                <label>HDD</label>
-                                                <input ng-model="model.hdd">
-                                            </md-input-container>
-                                            <md-input-container class="md-block" flex-gt-sm>
-                                                <label>RAM</label>
-                                                <input ng-model="model.ram">
-                                            </md-input-container>
-                                            <md-input-container class="md-block" flex-gt-sm>
-                                                <label>Operation system</label>
-                                                <input ng-model="model.os">
-                                            </md-input-container>
-                                        </div>
-                                        <div class="col-sm">
-                                            <md-input-container class="md-block" flex-gt-sm>
-                                                    <label>GPU</label>
-                                                    <input ng-model="model.gpu">
-                                            </md-input-container>
-                                            <md-input-container class="md-block" flex-gt-sm>
-                                                    <label>User</label>
-                                                    <input class="form-control" ng-model="model.user" required>
-                                            </md-input-container>
-                                            </div>
-                                       
-                                            <div class="col-sm">
-                                                    <label for="date-input">Warranty:</label>
-                                                <p><md-datepicker ng-model="model.warranty" md-current-view="year" md-placeholder="Enter date" md-open-on-focus></md-datepicker></p>
-                                                    <label for="date-input">Last Maintenance:</label>
-                                                <p><md-datepicker ng-model="model.lastmaint" md-current-view="year" md-placeholder="Enter date" md-open-on-focus></md-datepicker></p>
-                                            </div>
-                        </form>
-                                    
+                        <md-select ng-model="teamFilter">
+                            <md-option value="{{undefined}}">All</md-option>
+                            <md-option value="Service Plan">Service Plan</md-option>
+                            <md-option value="Menu Pricing">Menu Pricing</md-option>
+                            <md-option value="iVHC Web">iVHC Web</md-option>
+                            <md-option value="iVHC Database">iVHC Database</md-option>
+                            <md-option value="CRM">CRM</md-option>
+                            <md-option value="Stock Master">Stock Master</md-option>
+                            <md-option value="Cloud & Infrastructure">Cloud & Infrastructure</md-option>
+                            <md-option value="In House Systems">In House Systems</md-option>
+                            <md-option value="Mobile">Other</md-option>
+                            <md-option value="API">API</md-option>
+                            <md-option value="Service Plan Support">Service Plan Support</md-option>
+                            <md-option value="iVHC Support">iVHC Support</md-option>
+                            <md-option value="Customer Portal">Customer Portal</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <!-- Adjust Manually Button -->
+                    <button id="adjustButton" data-toggle="collapse" href="#menu" aria-expanded="true"
+                        aria-controls="menu">Adjust Manually</button>
+                </div>
+                <!-- Inputs -->
+                <div id="menu" class="container collapse">
+                    <h5>Asset Management</h5>
+                    <form name="AssetForm">
+                        <div class="row">
+                            <div class="col-sm">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>ESET Number</label>
+                                    <input class="form-control" ng-model="model.eset" required>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Brand</label>
+                                    <input ng-model="model.brand">
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Asset Type</label>
+                                    <md-select ng-model="model.type" required>
+                                        <md-option value="Computer">Computer</md-option>
+                                        <md-option value="Laptop">Laptop</md-option>
+                                        <md-option value="iMac">iMac</md-option>
+                                        <md-option value="Monitor">Monitor</md-option>
+                                        <md-option value="Printer">Printer</md-option>
+                                        <md-option value="Peripheral device">Peripheral device</md-option>
+                                        <md-option value="Other">Other</md-option>
+                                    </md-select>
+                                </md-input-container>
                             </div>
-                            <!-- Form Buttons -->
-                            <div class="man-but">
-                                <button type="submit" class="man-but-insert" ng-disabled="AssetForm.$invalid" ng-click="addAsset(); successAlert()">Insert</button>
-                                <button class="man-but-remove" ng-click="removeAsset(); removeAlert()">Remove</button>
-                                <button class="man-but-clear" ng-click="reset()" >Clear</button>
+                            <div class="col-sm">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Serial</label>
+                                    <input ng-model="model.serial">
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>SSD</label>
+                                    <input ng-model="model.ssd">
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>CPU</label>
+                                    <input ng-model="model.cpu">
+                                </md-input-container>
                             </div>
-                       
-                    </div>
-                    <!-- Table 1 - Maintenance -->
-                    <div class="table1">
-                    <table class="table-sm" id="paginationFull" >
-                        <!-- Table Headers -->
-                        <thead>
-                            <tr id="tr1">
-                                <th></th>
-                                <th>User</th>
-                                <th>ESET Number</th>
-                                <th>Type</th>
-                                <th>Brand</th>
-                                <th>Serial/Service Tag</th>
-                                <th>Description</th>
-                                <th>Date Added</th>
-                                <th>Warranty</th>
-                                <th>Last Maintenance</th>
-                            </tr>
-                        </thead>
-                        <!-- Data -->
-                        <tbody>
-                            <!-- ngRepeat: asset in assetArray -->
-                            <tr ng-repeat="asset in assetArray | filter:predicate(typeFilter)">
-                                <td class="ng-binding">
-                                    <input type="checkbox" ng-model="asset.selected" ng-click="checkedValue()"/>
-                                </td>
-                                <td class="ng-binding">{{ asset.user }}</td>
-                                <td class="ng-binding">{{ asset.eset }}</td>
-                                <td class="ng-binding">{{ asset.type }}</td>
-                                <td class="ng-binding">{{ asset.brand }}</td>
-                                <td class="ng-binding">{{ asset.serial }}</td>
-                                <td class="ng-binding">{{ asset.description }}</td>
-                                <td class="ng-binding">{{ asset.dateAdded | date:'dd.MM.yyyy'}}</td>
-                                <td class="ng-binding">{{ asset.warranty | date:'dd.MM.yyyy' || ""}}</td>
-                                <td class="ng-binding">{{ asset.lastmaint | date:'dd.MM.yyyy' || ""}}</td>
-                            </tr> 
-                            <!-- CSV file asset import -->
-                            <tr ng-repeat="r in results">
+                            <div class="col-sm">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>HDD</label>
+                                    <input ng-model="model.hdd">
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>RAM</label>
+                                    <input ng-model="model.ram">
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Operation system</label>
+                                    <input ng-model="model.os">
+                                </md-input-container>
+                            </div>
+                            <div class="col-sm">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>GPU</label>
+                                    <input ng-model="model.gpu">
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>User</label>
+                                    <input class="form-control" ng-model="model.user" required>
+                                </md-input-container>
+                            </div>
+
+                            <div class="col-sm">
+                                <label for="date-input">Warranty:</label>
+                                <p>
+                                    <md-datepicker ng-model="model.warranty" md-current-view="year"
+                                        md-placeholder="Enter date" md-open-on-focus></md-datepicker>
+                                </p>
+                                <label for="date-input">Last Maintenance:</label>
+                                <p>
+                                    <md-datepicker ng-model="model.lastmaint" md-current-view="year"
+                                        md-placeholder="Enter date" md-open-on-focus></md-datepicker>
+                                </p>
+                            </div>
+                    </form>
+
+                </div>
+                <!-- Form Buttons -->
+                <div class="man-but">
+                    <button type="submit" class="man-but-insert" ng-disabled="AssetForm.$invalid"
+                        ng-click="addAsset(); successAlert()">Insert</button>
+                    <button class="man-but-remove" ng-click="removeAsset(); removeAlert()">Remove</button>
+                    <button class="man-but-clear" ng-click="reset()">Clear</button>
+                </div>
+
+            </div>
+            <!-- Table 1 - Maintenance -->
+            <div class="table1">
+                <table class="table-sm" id="paginationFull" style="width:100%;">
+                    <!-- Table Headers -->
+                    <thead>
+                        <tr id="tr1">
+                            <th></th>
+                            <th>User</th>
+                            <th>ESET Number</th>
+                            <th>Type</th>
+                            <th>Brand</th>
+                            <th>Serial/Service Tag</th>
+                            <th>Description</th>
+                            <th>Date Added</th>
+                            <th>Warranty</th>
+                            <th>Last Maintenance</th>
+                        </tr>
+                    </thead>
+                    <!-- Data -->
+                    <tbody>
+                        <!-- ngRepeat: asset in assetArray -->
+                        <tr ng-repeat="asset in assetArray | filter:predicate(typeFilter)">
+                            <td class="ng-binding">
+                                <input type="checkbox" ng-model="asset.selected" ng-click="checkedValue()" />
+                            </td>
+                            <td class="ng-binding">{{ asset.Name }}</td>
+                            <td class="ng-binding">{{ asset.ESET_Number }}</td>
+                            <td class="ng-binding">{{ asset.Type }}</td>
+                            <td class="ng-binding">{{ asset.Brand }}</td>
+                            <td class="ng-binding">{{ asset.Serial_service_tag }}</td>
+                            <td class="ng-binding">{{ asset.Description }}</td>
+                            <td class="ng-binding">{{ asset.Create_Date | date:'dd.MM.yyyy'}}</td>
+                            <td class="ng-binding">{{ asset.Warranty | date:'dd.MM.yyyy' || ""}}</td>
+                            <td class="ng-binding">{{ asset.Maintenance | date:'dd.MM.yyyy' || ""}}</td>
+                        </tr>
+                        <!-- CSV file asset import -->
+                        <!-- <tr ng-repeat="r in results">
                                 <td class="ng-binding">
                                     <input type="checkbox" ng-model="asset.selected" ng-click="checkedValue()"/>
                                 </td>
                                 <td ng-repeat="c in fields"> {{ r[c] }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!-- <nav aria-label="Page navigation example">
+                            </tr> -->
+                        <!-- <tr ng-repeat="edyn in edynassets track by $index">
+                                <td> {{ edyn.ename }} </td>
+                                <td> {{ edyn.eeset }} </td>
+                                <td> {{ edyn.etype }} </td>
+                                <td> {{ edyn.ebrand }} </td>
+                                <td> {{ edyn.eserial }} </td>
+                                <td> {{ edyn.edescription }} </td>
+                                <td> {{ edyn.ecreate }} </td>
+                                <td> {{ edyn.ewarranty }} </td>
+                                <td> {{ edyn.emaintenance }} </td>
+                            </tr> -->
+                    </tbody>
+                </table>
+                <!-- <nav aria-label="Page navigation example">
                         <ul class="pagination">
                           <li class="page-item">
                             <a class="page-link" href="#" aria-label="Previous">
@@ -208,16 +229,16 @@
                           </li>
                         </ul>
                       </nav> -->
-                    </div>
-                </div>
-                    <!-- Specifications & Costs Title -->
-                    <!-- <div class="text-left">
+            </div>
+        </div>
+        <!-- Specifications & Costs Title -->
+        <!-- <div class="text-left">
                     <h6>Specifications</h6>
                     <p style="margin-left: 50px; color: grey;">(if time allows)</p>
                     </div>
                 <div class="nav"> -->
-                        <!-- Buttons/Dropdowns -->
-                        <!-- <div class="upper-bar">
+        <!-- Buttons/Dropdowns -->
+        <!-- <div class="upper-bar">
                             <label style="margin-right:8px;" for="s.type">Part Type:</label>
                             <select class="custom-select filter" style="margin-right:25px;" id="s.type" name="s.type">
                                 <option value="All">All</option>
@@ -239,23 +260,35 @@
                             </select>
 
                         </div> -->
-                    <!-- Table 2 - Specifications -->
-                    <!-- <div class="table2">
-                        <table id="demo" style="width:100%"> -->
-                            <!-- Table Headers -->
-                                <!-- <tr id="tr1">
+        <!-- Table 2 - Specifications -->
+        <!-- <div class="table2" style="width:90%">
+                        <table id="demo" style="width:100%">
+                                <tr id="tr1">
                                     <th ng-repeat="h in fields">{{ h }}</th>
-                                </tr> -->
-                            <!-- Data -->
-                            <!-- <tbody>
-                                <tr ng-repeat="r in results">
-                                    <td ng-repeat="c in fields"> {{ r[c] }}</td>
+                                    <th>Name</th>
+                                    <th>ESET Number</th>
+                                    <th>Type</th>
+                                    <th>Brand</th>
+                                    <th>Serial/Service tag</th>
+                                    <th>Description</th>
+                                    <th>Create Date</th>
+                                    <th>Warranty</th>
+                                    <th>Maintenance</th>
                                 </tr>
-                            </tbody> -->
-                            <!-- Total -->
-                        <!-- </table>
-                    </div>
-                </div> -->
+                            <tr ng-repeat="edyn in edynamix track by $index">
+                                <td> {{ edyn.ename }} </td>
+                                <td> {{ edyn.eeset }} </td>
+                                <td> {{ edyn.etype }} </td>
+                                <td> {{ edyn.ebrand }} </td>
+                                <td> {{ edyn.eserial }} </td>
+                                <td> {{ edyn.edescription }} </td>
+                                <td> {{ edyn.ecreate }} </td>
+                                <td> {{ edyn.ewarranty }} </td>
+                                <td> {{ edyn.emaintenance }} </td>
+                            </tr>
+                        </table>
+                    </div> -->
+        <!-- </div> -->
     </div>
 </body>
 
@@ -265,151 +298,166 @@
     body {
         background-color: #EEEEEE;
     }
+
     /*Titles & Headings*/
     h6 {
         font-size: 36px;
-        margin:20px;
-        color:#2C2F3E;
+        margin: 20px;
+        color: #2C2F3E;
     }
 
-    h5{
+    h5 {
         font-size: 24px;
-        margin:15px;
-        color:#2C2F3E;
+        margin: 15px;
+        color: #2C2F3E;
     }
 
     /*Tables*/
     .table1 {
-        width:100%;
-        margin-left:40px;
-        margin-right:40px;
-        margin-bottom:12px;
+        width: 100%;
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-bottom: 12px;
         font-size: 14px;
         border: 1px solid #F5F8FD;
         text-align: center;
         background-color: white;
     }
+
     .table2 {
         width: 100%;
-        margin-left:80px;
-        margin-right:80px;
+        margin-left: 80px;
+        margin-right: 80px;
         margin-bottom: 12px;
         font-size: 14px;
         border: 1px solid #F5F8FD;
         text-align: center;
-        background-color:white;
+        background-color: white;
     }
-     #thdesc {
+
+    #thdesc {
         border-inline-start: 1px solid #F5F8FD;
         border-inline-end: 1px solid #F5F8FD;
         color: #2C2F3E;
-    } 
+    }
+
     td {
         border: 1px solid #F5F8FD;
         font-size: 12px;
         text-align: left;
         padding: 5px;
     }
+
     th {
         background-color: #C5DDF0;
     }
+
     tr:hover {
         background-color: #F5F8FD;
     }
+
     .text-left {
-        margin-left:50px;
-    }    
+        margin-left: 50px;
+    }
 
     /* Navigation */
     @media (prefers-reduced-motion: reduce) {
-    .collapsing {
-        transition-property: height, visibility;
-        transition-duration: .35s;
-    }
-    .nav{
-        margin-bottom:10px;
-        margin-left:80px;
-        margin-right:80px;
-        background-color: white;
-        border-radius: 7px;
-    }
+        .collapsing {
+            transition-property: height, visibility;
+            transition-duration: .35s;
+        }
 
-    .row{
-        border-radius: 12px;
-        background-color:#F5F8FD;
-        border:1px solid #C5DDF0;
-    }
+        .nav {
+            margin-bottom: 10px;
+            margin-left: 80px;
+            margin-right: 80px;
+            background-color: white;
+            border-radius: 7px;
+        }
 
-    .col-sm{
-        margin-top:20px;
-    }
-    .custom-select {
-        width:72%;
-    }
-    .custom-select.filter{
-        width:12%;
-    }
+        .row {
+            border-radius: 12px;
+            background-color: #F5F8FD;
+            border: 1px solid #C5DDF0;
+        }
 
-    .upper-bar{
-        border-radius: 15px;
-        padding: 10px;
-        background-color: white;
-        width:100%;
-        margin-left:60px;
-    }
-    /* Buttons */
-    #adjustButton{
-        background-color:#B4B7BA;
-        border-radius: 5px;
-        color:white;
-        border-color:unset;
-        border-width: 1px;
-    }
-    .man-but{
-        text-align:center;
-        margin-top:10px;
-        margin-bottom: 20px;
-    }
-    .man-but-clear {
-        background-color:#B4B7BA; 
-        border-radius: 5px;
-        color:white; 
-        border-color: unset;
-        border-width: 1px;
-    }
+        .col-sm {
+            margin-top: 20px;
+        }
 
-    .man-but-remove{
-        background-color:#F5A061;
-        border-radius: 5px;
-        color:white;
-        border-color:unset;
-        border-width: 1px;
-    }
-    .man-but-insert{
-        background-color:#7BC96C;
-        border-radius: 5px;
-        color:white;
-        border-color:unset;
-        border-width: 1px;
-    }
-    .man-but-insert:disabled {
-        background-color: #7BC96C;
-        opacity: 66%;
-    }
+        .custom-select {
+            width: 72%;
+        }
 
-    .man-but-remove:disabled {
-        background-color:#F5A061;
-        opacity: 66%;
-    }
+        .custom-select.filter {
+            width: 12%;
+        }
 
-    /* Alerts */
-    .alert{
-        position: fixed;
-        text-align: center;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 20px;    
+        .upper-bar {
+            border-radius: 15px;
+            padding: 10px;
+            background-color: white;
+            width: 100%;
+            margin-left: 60px;
+        }
+
+        /* Buttons */
+        #adjustButton {
+            background-color: #B4B7BA;
+            border-radius: 5px;
+            color: white;
+            border-color: unset;
+            border-width: 1px;
+        }
+
+        .man-but {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .man-but-clear {
+            background-color: #B4B7BA;
+            border-radius: 5px;
+            color: white;
+            border-color: unset;
+            border-width: 1px;
+        }
+
+        .man-but-remove {
+            background-color: #F5A061;
+            border-radius: 5px;
+            color: white;
+            border-color: unset;
+            border-width: 1px;
+        }
+
+        .man-but-insert {
+            background-color: #7BC96C;
+            border-radius: 5px;
+            color: white;
+            border-color: unset;
+            border-width: 1px;
+        }
+
+        .man-but-insert:disabled {
+            background-color: #7BC96C;
+            opacity: 66%;
+        }
+
+        .man-but-remove:disabled {
+            background-color: #F5A061;
+            opacity: 66%;
+        }
+
+        /* Alerts */
+        .alert {
+            position: fixed;
+            text-align: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+        }
     }
-}
 </style>
