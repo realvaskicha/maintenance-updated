@@ -14,14 +14,6 @@ angular.module('myApp.maintenance', [
     });
   }])
 
-  //   .filter("undeFilter",function(){
-  //   return function(input){
-  //          switch(input){
-  //          case undefined:
-  //          return "";
-  //   }
-  // }})
-
   .controller('formControl', function ($scope, $http, $filter) {
     //data model input fields
     const model = {
@@ -44,7 +36,6 @@ angular.module('myApp.maintenance', [
       method: 'get',
       url: 'http://localhost:3000/asset'
     }).then(function successCallback(response) {
-      //  console.log(response);
       // Store response data
       $scope.assetArray = response.data;
     });
@@ -71,16 +62,16 @@ angular.module('myApp.maintenance', [
 
     // });
 
-    //mock data asset array
+    //hardcoded mock data
     // $scope.assetArray = [{ eset: "EDYN-00315", type: "Laptop", brand: "HP", serial: "S/N: 2CE3341P2D",
     // description: "SSD: 240GB, CPU: i5-8250U @ 1.60 GHz, HDD: 1TB, RAM: 8GB, OS: Windows Enterprise 64-bit, GPU: GTX 960", user: "t.kolev", dateAdded: new Date(), warranty: "12.12.2015",  lastmaint: "24.03.2017" }]
 
-    //reset function
+    //reset input fields
     $scope.reset = function () {
       $scope.model = angular.copy(model);
     };
 
-    //insert asset
+    //insert new asset
     $scope.addAsset = function () {
       $scope.model.dateAdded = new Date()
       $scope.model.description = "SSD: " + $scope.model.ssd + ", " + "CPU: " + $scope.model.cpu + ", " + "HDD: " + $scope.model.hdd +
@@ -98,6 +89,7 @@ angular.module('myApp.maintenance', [
         'Maintenance': $scope.model.lastmaint
       }
       console.log(data);
+      //write mysql database
       $http.post('http://localhost:3000/asset', data, {
         headers: {
           'Content-Type': 'application/json'
@@ -140,13 +132,9 @@ angular.module('myApp.maintenance', [
       $scope.alerts.splice(index, 1);
     };
 
-    //$scope.submit = function(asset){
-    // alert(JSON.stringify(asset));
-    //}
-
     //highlight table row onclick
 
-    //type filter
+    //asset type filter
     $scope.predicate = function (typeFilter) {
       return function (asset) {
         return !typeFilter || asset.type === typeFilter;
@@ -155,5 +143,4 @@ angular.module('myApp.maintenance', [
 
     //remove button validation
 
-    //pagination
   })
