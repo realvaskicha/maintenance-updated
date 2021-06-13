@@ -85,8 +85,8 @@ angular.module('myApp.maintenance', [
         'Serial_service_tag': $scope.model.serial,
         'Description': $scope.model.description,
         'Create_Date': $filter('date')($scope.model.dateAdded, "dd-MM-yyyy"),
-        'Warranty': $scope.model.warranty,
-        'Maintenance': $scope.model.lastmaint
+        'Warranty': $filter('date')($scope.model.warranty, "dd-MM-yyyy"),
+        'Maintenance': $filter('date')($scope.model.lastmaint, "dd-MM-yyyy")
       }
       console.log(data);
       //write mysql database
@@ -137,7 +137,7 @@ angular.module('myApp.maintenance', [
     //asset type filter
     $scope.predicate = function (typeFilter) {
       return function (asset) {
-        return !typeFilter || asset.type === typeFilter;
+        return !typeFilter || asset.Type === typeFilter;
       };
     };
 
